@@ -8,11 +8,15 @@ from report import create_report
 from analysis import explain_match
 from sections import check_sections
 
+
+st.set_page_config(page_title="AI Resume ATS Checker")
+
 st.title("AI Resume ATS Checker")
 
 resume_file = st.file_uploader("Upload Resume (PDF)", type="pdf")
 
 job_description = st.text_area("Paste Job Description")
+
 
 if resume_file and job_description:
 
@@ -32,27 +36,38 @@ if resume_file and job_description:
 
     report = create_report(score, skills, matched, missing, suggestions)
 
+
     st.subheader("ATS Score")
-    st.write(score)
+
+    st.progress(int(score))
+
+    st.write(f"Score: {score}%")
 
     st.subheader("Match Explanation")
+
     st.write(explanation)
 
     st.subheader("Skills Found")
+
     st.write(skills)
 
     st.subheader("Matched Keywords")
+
     st.write(matched)
 
     st.subheader("Missing Keywords")
+
     st.write(missing)
 
     st.subheader("Resume Sections Detected")
+
     st.write(sections_found)
 
     st.subheader("Suggestions")
+
     for s in suggestions:
         st.write("-", s)
+
 
     st.download_button(
         "Download Resume Report",
