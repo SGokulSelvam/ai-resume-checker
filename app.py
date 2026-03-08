@@ -2,7 +2,7 @@ import streamlit as st
 from parser import extract_text
 from ats_score import calculate_score
 from keyword_match import keyword_analysis
-from skills import detect_skills
+from skills import detect_skills, missing_skills
 from suggestions import generate_suggestions
 from report import create_report
 from analysis import explain_match
@@ -32,6 +32,8 @@ if resume_file and job_description:
 
     skills = detect_skills(resume_text)
 
+    missing_skill_list = missing_skills(resume_text, job_description)
+
     suggestions = generate_suggestions(score, missing, sections_found)
 
     report = create_report(score, skills, matched, missing, suggestions)
@@ -50,6 +52,10 @@ if resume_file and job_description:
     st.subheader("Skills Found")
 
     st.write(skills)
+
+    st.subheader("Missing Skills")
+
+    st.write(missing_skill_list)
 
     st.subheader("Matched Keywords")
 
