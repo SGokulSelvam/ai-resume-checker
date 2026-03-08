@@ -1,11 +1,12 @@
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+
 
 def calculate_score(resume_text, job_description):
 
     documents = [resume_text, job_description]
 
-    vectorizer = CountVectorizer()
+    vectorizer = TfidfVectorizer()
 
     matrix = vectorizer.fit_transform(documents)
 
