@@ -8,12 +8,37 @@ from report import create_report
 from analysis import explain_match
 from sections import check_sections
 
-
 st.set_page_config(page_title="AI Resume ATS Checker")
 
 st.title("AI Resume ATS Checker")
 
+st.write(
+"""
+Upload your resume and compare it with a job description.
+
+This tool analyzes:
+• ATS compatibility score
+• Missing keywords
+• Skills detected
+• Missing skills
+• Resume improvement suggestions
+"""
+)
+
 resume_file = st.file_uploader("Upload Resume (PDF)", type="pdf")
+
+if st.button("Use Sample Job Description"):
+    job_description = """
+Machine Learning Engineer required.
+
+Skills:
+Python
+Machine Learning
+Deep Learning
+SQL
+TensorFlow
+Data Analysis
+"""
 
 job_description = st.text_area("Paste Job Description")
 
